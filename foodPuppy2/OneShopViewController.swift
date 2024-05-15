@@ -24,6 +24,8 @@ class OneShopViewController: UIViewController {
     @IBOutlet weak var itemCountLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     
+    var cartDic: [String: [Int]] = [:]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,16 +33,16 @@ class OneShopViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         // 取得螢幕的尺寸
-        let fullSize = UIScreen.main.bounds.size
+        _ = UIScreen.main.bounds.size
 
         // 設置底色
         self.view.backgroundColor = UIColor.white
         
-        if totalPrice == 0{
+
             
-            self.showTotalPrice.isHidden = true
+        self.showTotalPrice.isHidden = true
             
-        }
+ 
         
         self.buttonView.layer.cornerRadius = 10
         
@@ -68,7 +70,6 @@ class OneShopViewController: UIViewController {
     @IBAction func goBackAction(_ sender: Any) {
         
         self.dismiss(animated: true, completion:nil)
-        
     }
     
     @objc func goCart(_ sender:UITapGestureRecognizer){
@@ -76,26 +77,50 @@ class OneShopViewController: UIViewController {
         
         let vc = shopCartViewController()
         
+        vc.setFoodInfo(dic: cartDic)
+        
+        vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
         self.present(vc, animated: false, completion: nil)
     }
     
-    var totalPrice = 0
-    var itemNum = 0
-    
-    
-    func calculatePrice(price:Int) {
+    func calculatePrice(price:Int, fName:String) {
         
-        totalPrice = totalPrice + price
-        itemNum += 1
+        if cartDic[fName] == nil
+        {
+            
+            cartDic[fName] = [price, 1]
+ 
+        }
+        else
+        {
+            
+            let tenpArray:[Int] = cartDic[fName]!
+            cartDic[fName] = [price, tenpArray[1] + 1]
+            
+        }
+        
+        let allfood = cartDic.keys
+        var totalPrice = 0
+        var totalNum = 0
+        
+        for food in allfood
+        {
+            
+            let tenpArray:[Int] = cartDic[food]!
+            totalPrice += tenpArray[0] * tenpArray[1]
+            totalNum += tenpArray[1]
+            
+        }
+
         
         if totalPrice != 0{
             
             self.showTotalPrice.isHidden = false
-            self.itemCountLabel.text = "\(itemNum)"
+            self.itemCountLabel.text = "\(totalNum)"
             
-            if itemNum < 100 {
+            if totalNum < 100 {
                 
-                self.itemCountLabel.text = "\(itemNum)"
+                self.itemCountLabel.text = "\(totalNum)"
                 
             }else{
                 
@@ -113,48 +138,53 @@ class OneShopViewController: UIViewController {
     @IBAction func hFPrice1(_ sender: Any) {
         
         let price = 175
-        
-        calculatePrice(price: price)
+        let fName = "醬爆牛肉片套餐"
+        calculatePrice(price: price, fName: fName)
         
     }
     
     @IBAction func hFPrice2(_ sender: Any) {
         
         let price = 241
+        let fName = "香煎雞排套餐"
         
-        calculatePrice(price: price)
+        calculatePrice(price: price, fName: fName)
         
     }
     
     @IBAction func hFPrice3(_ sender: Any) {
         
         let price = 241
+        let fName = "醬爆沙朗牛肉套餐"
         
-        calculatePrice(price: price)
+        calculatePrice(price: price, fName: fName)
         
     }
     
     @IBAction func hFPrice4(_ sender: Any) {
         
        let price = 175
+       let fName = "醬爆雞柳條套餐"
         
-        calculatePrice(price: price)
+        calculatePrice(price: price, fName: fName)
         
     }
     
     @IBAction func hFPrice5(_ sender: Any) {
         
         let price = 175
+        let fName = "醬爆豬肉片套餐"
         
-        calculatePrice(price: price)
+        calculatePrice(price: price, fName: fName)
         
     }
     
     @IBAction func hFPrice6(_ sender: Any) {
         
         let price = 203
+        let fName = "香煎比目魚套餐"
         
-        calculatePrice(price: price)
+        calculatePrice(price: price, fName: fName)
         
     }
     

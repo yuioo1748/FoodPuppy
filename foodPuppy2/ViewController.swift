@@ -34,7 +34,7 @@ class ViewController: UIViewController {
         
         overrideUserInterfaceStyle = .light
         // 取得螢幕的尺寸
-        let fullSize = UIScreen.main.bounds.size
+        _ = UIScreen.main.bounds.size
 
         // 設置底色
         self.view.backgroundColor = UIColor.white
