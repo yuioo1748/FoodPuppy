@@ -6,13 +6,26 @@
 //
 import UIKit
 
+
+protocol CartDelegate {
+    
+//將更改的資料傳回上一頁
+func dicFromCart( dic: [String: [Int]])
+    
+}
+
+
+
 class shopCartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var myTableView : UITableView?
     
     @IBOutlet weak var goBackButton: UIBarButtonItem!
+    @IBOutlet weak var totalPriceLabel: UILabel!
+    @IBOutlet weak var payButtonView: UIView!
     
     var cartDic: [String: [Int]] = [:]
+    var delegate: CartDelegate! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +66,10 @@ class shopCartViewController: UIViewController, UITableViewDelegate, UITableView
         // 加入到畫面中
         self.view.addSubview(myTableView!)
         
+        //將view移到最上層
+        view.bringSubviewToFront(payButtonView)
+        calculatePrice()
+        
     }
 
 
@@ -68,7 +85,7 @@ class shopCartViewController: UIViewController, UITableViewDelegate, UITableView
 
     //返回鍵
     @IBAction func goBackAction(_ sender: Any) {
-        
+        delegate.dicFromCart(dic: cartDic)
         self.dismiss(animated: true, completion:nil)
         
     }
@@ -78,6 +95,36 @@ class shopCartViewController: UIViewController, UITableViewDelegate, UITableView
         
         cartDic = dic
         
+    }
+    
+    func calculatePrice() {
+        
+        
+        let allfood = cartDic.keys
+        var totalPrice = 0
+        
+        for food in allfood
+        {
+            
+            let tempArray:[Int] = cartDic[food]!
+            totalPrice += tempArray[0] * tempArray[1]
+            
+        }
+
+        if totalPrice == 0
+        {
+            //想要關閉此頁跳回前一頁
+            
+            delegate.dicFromCart(dic: cartDic)
+            self.dismiss(animated: true, completion:nil)
+            
+        }
+        else
+        {
+            
+            self.totalPriceLabel.text = "$ \(totalPrice)"
+            
+        }
     }
     
     // 必須實作的方法：每一組有幾個 cell
@@ -102,7 +149,7 @@ class shopCartViewController: UIViewController, UITableViewDelegate, UITableView
         var totalNum = 0
         
         let a = Array(allfood)[indexPath.row]
-        var tempArray:[Int] = cartDic[a]!
+        let tempArray:[Int] = cartDic[a]!
             totalPrice += tempArray[0] * tempArray[1]
             totalNum += tempArray[1]
             // 顯示的內容
@@ -126,17 +173,22 @@ class shopCartViewController: UIViewController, UITableViewDelegate, UITableView
             if editingStyle == .delete {
                 // 实现这个方法后即出现左滑删除框
                 cartDic.removeValue(forKey: a)
-//                tableView.reloadData()
+                calculatePrice()
 //                //更新视图
                 tableView.deleteRows(at: [indexPath], with: .fade)
             } else if editingStyle == .insert {
                 // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
             }
+            
+            
         }
  
     // 設置 cell 的高度
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
+    
+    
+    
     
 }

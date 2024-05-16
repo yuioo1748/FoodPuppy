@@ -11,6 +11,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="shopCartViewController" customModule="foodPuppy2" customModuleProvider="target">
             <connections>
                 <outlet property="goBackButton" destination="3AD-Iv-EFF" id="hPX-8w-gi7"/>
+                <outlet property="payButtonView" destination="p7E-C6-Fg8" id="aNO-tp-ABc"/>
+                <outlet property="totalPriceLabel" destination="ZvF-as-sft" id="a2x-6e-MZn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -34,10 +36,67 @@
                         </navigationItem>
                     </items>
                 </navigationBar>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p7E-C6-Fg8">
+                    <rect key="frame" x="0.0" y="712" width="393" height="140"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hef-lW-ye5">
+                            <rect key="frame" x="15" y="47.666666666666629" width="363" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="zp9-Ru-afd"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="查看付款方式和地址">
+                                <backgroundConfiguration key="background">
+                                    <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                </backgroundConfiguration>
+                                <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="16"/>
+                                <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </buttonConfiguration>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="總金額" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccM-0O-3Op">
+                            <rect key="frame" x="15" y="0.0" width="63" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="費用" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jbY-Ki-Yor">
+                            <rect key="frame" x="96.666666666666671" y="18" width="21" height="11.666666666666664"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZvF-as-sft">
+                            <rect key="frame" x="332.66666666666669" y="-1" width="45.333333333333314" height="39.666666666666664"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="hef-lW-ye5" firstAttribute="top" secondItem="jbY-Ki-Yor" secondAttribute="bottom" constant="17.670000000000002" id="80n-0l-TaB"/>
+                        <constraint firstItem="hef-lW-ye5" firstAttribute="centerY" secondItem="p7E-C6-Fg8" secondAttribute="centerY" id="8vr-ag-eD0"/>
+                        <constraint firstAttribute="trailing" secondItem="hef-lW-ye5" secondAttribute="trailing" constant="15" id="E0b-fh-tys"/>
+                        <constraint firstItem="jbY-Ki-Yor" firstAttribute="top" secondItem="p7E-C6-Fg8" secondAttribute="top" constant="18" id="Mel-eL-Af7"/>
+                        <constraint firstItem="ZvF-as-sft" firstAttribute="leading" secondItem="jbY-Ki-Yor" secondAttribute="trailing" constant="215" id="Oll-7p-t7M"/>
+                        <constraint firstItem="hef-lW-ye5" firstAttribute="centerX" secondItem="p7E-C6-Fg8" secondAttribute="centerX" id="h7V-il-Y5g"/>
+                        <constraint firstAttribute="height" constant="140" id="j3d-CJ-dz3"/>
+                        <constraint firstAttribute="trailing" secondItem="ZvF-as-sft" secondAttribute="trailing" constant="15" id="k8v-Zf-OjT"/>
+                        <constraint firstItem="hef-lW-ye5" firstAttribute="top" secondItem="ZvF-as-sft" secondAttribute="bottom" constant="8.6699999999999999" id="lia-hg-0WO"/>
+                        <constraint firstItem="ZvF-as-sft" firstAttribute="top" secondItem="p7E-C6-Fg8" secondAttribute="top" constant="-1" id="rVs-zH-QEU"/>
+                        <constraint firstItem="hef-lW-ye5" firstAttribute="leading" secondItem="p7E-C6-Fg8" secondAttribute="leading" constant="15" id="tgf-HK-ueG"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-            <point key="canvasLocation" x="30" y="20"/>
+            <constraints>
+                <constraint firstItem="p7E-C6-Fg8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="V64-5u-EbB"/>
+                <constraint firstItem="p7E-C6-Fg8" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="imY-RU-34N"/>
+                <constraint firstAttribute="bottom" secondItem="p7E-C6-Fg8" secondAttribute="bottom" id="upv-yl-zlw"/>
+            </constraints>
+            <point key="canvasLocation" x="29.770992366412212" y="19.718309859154932"/>
         </view>
     </objects>
     <resources>

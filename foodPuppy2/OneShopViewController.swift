@@ -7,7 +7,16 @@
 
 import UIKit
 
-class OneShopViewController: UIViewController {
+class OneShopViewController: UIViewController, CartDelegate {
+    
+    func dicFromCart(dic: [String : [Int]]) {
+    
+        cartDic = dic
+        
+        showPrice()
+        
+    }
+    
 
     
     @IBOutlet weak var goBack: UIButton!
@@ -78,7 +87,7 @@ class OneShopViewController: UIViewController {
         let vc = shopCartViewController()
         
         vc.setFoodInfo(dic: cartDic)
-        
+        vc.delegate = self // 由我(PageA)來代理你(PageB)
         vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
         self.present(vc, animated: false, completion: nil)
     }
@@ -94,10 +103,16 @@ class OneShopViewController: UIViewController {
         else
         {
             
-            let tenpArray:[Int] = cartDic[fName]!
-            cartDic[fName] = [price, tenpArray[1] + 1]
+            let tempArray:[Int] = cartDic[fName]!
+            cartDic[fName] = [price, tempArray[1] + 1]
             
         }
+        
+        showPrice()
+        
+    }
+    
+    func showPrice(){
         
         let allfood = cartDic.keys
         var totalPrice = 0
@@ -106,9 +121,9 @@ class OneShopViewController: UIViewController {
         for food in allfood
         {
             
-            let tenpArray:[Int] = cartDic[food]!
-            totalPrice += tenpArray[0] * tenpArray[1]
-            totalNum += tenpArray[1]
+            let tempArray:[Int] = cartDic[food]!
+            totalPrice += tempArray[0] * tempArray[1]
+            totalNum += tempArray[1]
             
         }
 
@@ -131,8 +146,14 @@ class OneShopViewController: UIViewController {
             self.priceLabel.text = "$ \(totalPrice)"
             
         }
+        else
+        {
+            
+            self.showTotalPrice.isHidden = true
+        }
+        
+        
     }
-    
     
     
     @IBAction func hFPrice1(_ sender: Any) {

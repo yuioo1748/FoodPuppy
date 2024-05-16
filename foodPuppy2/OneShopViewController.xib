@@ -251,7 +251,6 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemMintColor"/>
                             <constraints>
                                 <constraint firstItem="ABI-rJ-hdH" firstAttribute="leading" secondItem="uV2-fm-esc" secondAttribute="leading" id="C3S-XG-aay"/>
                                 <constraint firstItem="ABI-rJ-hdH" firstAttribute="bottom" secondItem="uV2-fm-esc" secondAttribute="bottom" id="CSf-7d-oHw"/>
@@ -360,9 +359,6 @@
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemMintColor">
-            <color red="0.0" green="0.78039215689999997" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
